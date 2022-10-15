@@ -21,7 +21,7 @@ class HospitalListItem extends StatelessWidget {
             style: TextStyle(fontSize: 18),
           ),
           subtitle: Text(
-            "${hospital.location} km",
+            "${hospital.location.toStringAsFixed(1)} km",
             style: TextStyle(fontSize: 16),
           ),
           trailing: Row(

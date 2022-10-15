@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient_app/presentation/pages/emergency_page.dart';
 
-void main() {
+void main() async {
   runApp( MyApp());
 }
 
@@ -13,7 +14,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+
     return MaterialApp(
+      builder: EasyLoading.init(),
         title: 'Healtha',
         theme: ThemeData(
             // scaffoldBackgroundColor: kPrimaryColor,

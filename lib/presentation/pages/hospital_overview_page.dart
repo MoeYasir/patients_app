@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:patient_app/data/location.dart';
 import 'package:patient_app/domain/entites/hospital.dart';
 import 'package:patient_app/presentation/widgets/custom_button.dart';
 import 'package:patient_app/presentation/widgets/custom_icon.dart';
@@ -12,6 +13,8 @@ class HospitalOverviewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Location location = Location();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -108,7 +111,8 @@ class HospitalOverviewPage extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
-                    launchUrl(phoneLaunchUri(hospital.phoneNumber.toString()));
+                    // launchUrl(phoneLaunchUri(hospital.phoneNumber.toString()));
+                    location.getLocationPermissionState().then((value) => print(value));
                   },
                 ),
               ),
