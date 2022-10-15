@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomIcon extends StatelessWidget {
-  final IconData icon;
+  final String icon;
   final double size;
   final bool available;
 
@@ -9,9 +9,9 @@ class CustomIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Icon(
-      icon,
-      color: available? Colors.blue[400] : Colors.blue[70],
+    return ImageIcon(
+      AssetImage(icon),
+      color: available? Colors.blue[400] : Colors.red[400],
       size: size,
     );
   }

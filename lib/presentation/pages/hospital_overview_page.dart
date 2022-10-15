@@ -60,7 +60,7 @@ class HospitalOverviewPage extends StatelessWidget {
                       children: [
                         CustomIcon(
                           available: hospital.hasICU,
-                          icon: Icons.dangerous,
+                          icon: 'assets/icons/icu.png',
                           size: 50,
                         ),
                         Text(
@@ -77,7 +77,7 @@ class HospitalOverviewPage extends StatelessWidget {
                       children: [
                         CustomIcon(
                           available: hospital.hasAmbulance,
-                          icon: Icons.dangerous,
+                          icon: 'assets/icons/icons8-ambulance-64.png',
                           size: 50,
                         ),
                         Text(
@@ -111,8 +111,7 @@ class HospitalOverviewPage extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
-                    // launchUrl(phoneLaunchUri(hospital.phoneNumber.toString()));
-                    location.getLocationPermissionState().then((value) => print(value));
+                    launchUrl(phoneLaunchUri(hospital.phoneNumber.toString()));
                   },
                 ),
               ),
