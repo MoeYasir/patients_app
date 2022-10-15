@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:patient_app/pages/home_page.dart';
+import 'package:patient_app/presentation/pages/emergency_page.dart';
+import 'package:patient_app/presentation/pages/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
               // bodyText2: GoogleFonts.poppins().copyWith(color: Color(0xffF8ECD1)),
             ),
             primaryIconTheme: const IconThemeData(color: Colors.black)),
-        home: HomePage());
+        home: EmergencyPage()
+    );
   }
 }
