@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:patient_app/data/hospital.dart';
-import 'package:patient_app/domain/entites/hospital_data.dart';
+import 'package:patient_app/data/hospital_data.dart';
+import 'package:patient_app/domain/entites/hospital.dart';
 import 'package:patient_app/presentation/widgets/hospital_list_item.dart';
 
 class EmergencyPage extends StatelessWidget {

@@ -1,13 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:patient_app/domain/entites/hospital.dart';
 import 'package:patient_app/presentation/widgets/custom_button.dart';
 import 'package:patient_app/presentation/widgets/custom_icon.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HospitalOverviewPage extends StatelessWidget {
-  const HospitalOverviewPage({Key? key}) : super(key: key);
+  final Hospital hospital;
+
+  HospitalOverviewPage({Key? key, required this.hospital})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        bottomOpacity: 0,
+        elevation: 0,
+        foregroundColor: Colors.blue[400],
+      ),
       body: SafeArea(
         child: Container(
           alignment: Alignment.center,
@@ -18,7 +29,7 @@ class HospitalOverviewPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "Hospital Name",
+                  hospital.name,
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -28,7 +39,7 @@ class HospitalOverviewPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "Distance",
+                  "${hospital.location} km",
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w400,
@@ -38,17 +49,42 @@ class HospitalOverviewPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  // mainAxisSize: MainAxisSize.min,
                   children: [
-                    CustomIcon(
-                      available: true,
-                      icon: Icons.dangerous,
-                      size: 50,
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        CustomIcon(
+                          available: hospital.hasICU,
+                          icon: Icons.dangerous,
+                          size: 50,
+                        ),
+                        Text(
+                          "ICU",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        )
+                      ],
                     ),
-                    CustomIcon(
-                      available: false,
-                      icon: Icons.dangerous,
-                      size: 50,
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        CustomIcon(
+                          available: hospital.hasAmbulance,
+                          icon: Icons.dangerous,
+                          size: 50,
+                        ),
+                        Text(
+                          "Ambulance",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        )
+                      ],
                     ),
                   ],
                 ),
@@ -63,13 +99,17 @@ class HospitalOverviewPage extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * 0.1,
                   color: Colors.green[100],
                   child: Text(
-                    "Call Hospital",
+                    hospital.hasAmbulance
+                        ? "Call Hospital"
+                        : "Call Private Ambulance",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    launchUrl(phoneLaunchUri(hospital.phoneNumber.toString()));
+                  },
                 ),
               ),
             ],
@@ -78,4 +118,9 @@ class HospitalOverviewPage extends StatelessWidget {
       ),
     );
   }
+
+  Uri phoneLaunchUri(String phoneNumber) => Uri(
+    scheme: "tel",
+    path: "0" + phoneNumber,
+  );
 }

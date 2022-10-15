@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:patient_app/domain/entites/hospital_data.dart';
+import 'package:patient_app/domain/entites/hospital.dart';
 import 'package:patient_app/presentation/pages/hospital_overview_page.dart';
 
 import 'custom_icon.dart';
@@ -28,12 +28,12 @@ class HospitalListItem extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               CustomIcon(
-                available: true,
+                available: hospital.hasICU,
                 icon: Icons.dangerous,
                 size: 50,
               ),
               CustomIcon(
-                available: false,
+                available: hospital.hasAmbulance,
                 icon: Icons.dangerous,
                 size: 50,
               ),
@@ -43,7 +43,7 @@ class HospitalListItem extends StatelessWidget {
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => HospitalOverviewPage(),
+              builder: (context) => HospitalOverviewPage(hospital: hospital,),
             ),
           );
         },
