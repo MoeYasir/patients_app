@@ -30,18 +30,21 @@ class _EmergencyPageState extends State<EmergencyPage> {
       ),
       body: FutureBuilder(
           future: hospitalData.getEmergencyHospitals(5),
-          builder: (BuildContext context, AsyncSnapshot<List<Hospital>?> snapshot) {
+          builder:
+              (BuildContext context, AsyncSnapshot<List<Hospital>?> snapshot) {
             print(snapshot.data);
-            return snapshot.connectionState == ConnectionState.done ?  Container(
-              child: ListView.builder(
-                itemCount: snapshot.data?.length,
-                itemBuilder: (context, index) => HospitalListItem(
-                  hospital: snapshot.data![index],
-                ),
-              ),
-            ) :     EasyLoading.show(status: "Loading...") as Widget;
-
-
+            return snapshot.connectionState == ConnectionState.done
+                ? Container(
+                    child: ListView.builder(
+                      itemCount: snapshot.data?.length,
+                      itemBuilder: (context, index) => HospitalListItem(
+                        hospital: snapshot.data![index],
+                      ),
+                    ),
+                  )
+                : Center(
+                    child: CircularProgressIndicator(),
+                  );
           }),
     );
   }
